@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário HTML</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <img id="imagemCnpj" src="" alt="">
+        <form>
+            <h1>Formulário</h1>
+            <input type="text" placeholder="CNPJ" class="cnpjSelecionado">
+            <input type="button" value="Button" onclick="obterInformaticoesCNPJ()">
+        </form>
+    </div>
+
+    <script>
+        function obterInformaticoesCNPJ() {
+            const cnpj = document.querySelector(".cnpjSelecionado").value;
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const url = `https://receitaws.com.br/v1/cnpj/${cnpj}`;
+            alert(url);
+            fetch(proxyUrl + url)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        alert("Deu erro man");
+                    }
+                })
+
+                .then(data => {
+                    console.log("Deu bom!");
+                    alert(JSON.stringify(data));
+                })
+
+                .catch(error => {
+                    console.error("Deu erro man!");
+                })
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
